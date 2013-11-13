@@ -1,0 +1,12 @@
+{
+	"server": {
+		"port": 7001,
+		"host": "localhost"
+	},
+	"processes" : [
+		{
+			"name": "eCrud",
+			"cmd": "server.js"
+		}
+	]
+}
