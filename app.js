@@ -2,6 +2,9 @@
  * Module dependencies.
  */
 
+var processes = {};
+module.exports.processes = processes;
+
 var express = require('express');
 var routes = require('./routes');
 var user = require('./routes/user');
@@ -11,7 +14,6 @@ var config = require('config');
 var forever = require('forever');
 
 var app = express();
-var processes = [];
 
 // all environments
 app.set('port', process.env.PORT || 3000);
@@ -38,9 +40,6 @@ http.createServer(app).listen(config.server.port, config.server.host, function()
 	var p = config.processes[i];
 	var child = forever.startDaemon(p.cmd, p.options);
 	forever.startServer(child);
-	processes.push({
-	    pconfig : p,
-	    process : child
-	});
+	processes[p.uid] = {pconfig : p, process : child};
     }
 });

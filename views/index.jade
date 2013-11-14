@@ -9,12 +9,10 @@ block content
         th Name
         th Running
     tbody
-      tr
-        td eCrud
-        td Stopped
-      tr
-        td LENS
-        td Running
+      each p in processes
+        tr
+          td= p.pconfig.name
+          td Stopped
   form(method='POST')
     label(for='pname') Name
     input(name='pname', type='text')
