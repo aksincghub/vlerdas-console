@@ -8,7 +8,7 @@ var user = require('./routes/user');
 var http = require('http');
 var path = require('path');
 var config = require('config');
-var forever = require('forever-monitor');
+var forever = require('forever');
 
 var app = express();
 var processes = [];
@@ -36,15 +36,8 @@ http.createServer(app).listen(config.server.port, config.server.host, function()
     console.log('VLER DAS Console listening at http://' + config.server.host + ':' + config.server.port);
     for ( var i = 0; i < config.processes.length; ++i) {
 	var p = config.processes[i];
-	var child = new (forever.Monitor)(p.cmd, {
-	    'sourceDir' : 'c:\\Projects\\vlerdas-ecrud\\bin',
-	    'cwd' : 'c:\\Projects\vlerdas-ecrud',
-	    'max' : 5,
-	    'outFile' : 'stdout.txt',
-	    'errFile' : 'stderr.txt',
-	    'logFile' : 'log.txt'
-	});
-	child.start();
+	var child = forever.startDaemon(p.cmd, p.options);
+	forever.startServer(child);
 	processes.push({
 	    pconfig : p,
 	    process : child
