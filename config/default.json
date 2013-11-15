@@ -1,14 +1,13 @@
 {
 	"server": {
 		"port": 3015,
-		"host": "localhost"
+		"host": "vhamwvdevdasch2.vaco.va.gov"
 	},
-	"processes" : [
-		{
+	"processes" : {
+		"ecrud" : {
 			"name": "eCrud",
 			"cmd": "server.js",
 			"options": {
-						"uid" : "eCrud",
             			"sourceDir" : "../vlerdas-ecrud/bin",
             			"cwd" : "../vlerdas-ecrud",
             			"max" : 5,
@@ -17,5 +16,5 @@
             			"logFile" : "eCrud.log"
         		}
 		}
-	]
+	}
 }

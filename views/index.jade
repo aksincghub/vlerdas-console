@@ -11,8 +11,11 @@ block content
     tbody
       each p in processes
         tr
-          td= p.pconfig.name
-          td Stopped
+          td= p.name
+          if p.proc && p.proc.running
+            td Running
+          else
+            td Stopped
   form(method='POST')
     label(for='pname') Name
     input(name='pname', type='text')

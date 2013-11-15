@@ -2,9 +2,6 @@
  * Module dependencies.
  */
 
-var processes = {};
-module.exports.processes = processes;
-
 var express = require('express');
 var routes = require('./routes');
 var user = require('./routes/user');
@@ -36,10 +33,10 @@ app.get('/users', user.list);
 
 http.createServer(app).listen(config.server.port, config.server.host, function() {
     console.log('VLER DAS Console listening at http://' + config.server.host + ':' + config.server.port);
-    for ( var i = 0; i < config.processes.length; ++i) {
-	var p = config.processes[i];
+    for (var uid in config.processes) {
+	var p = config.processes[uid];
+	p.options.uid = uid;
 	var child = forever.startDaemon(p.cmd, p.options);
 	forever.startServer(child);
-	processes[p.uid] = {pconfig : p, process : child};
     }
 });
