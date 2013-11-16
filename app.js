@@ -29,14 +29,17 @@ if ('development' == app.get('env')) {
 }
 
 app.get('/', routes.index);
+app.post('/', routes.index);
 app.get('/users', user.list);
 
 http.createServer(app).listen(config.server.port, config.server.host, function() {
     console.log('VLER DAS Console listening at http://' + config.server.host + ':' + config.server.port);
+/*
     for (var uid in config.processes) {
 	var p = config.processes[uid];
 	p.options.uid = uid;
 	var child = forever.startDaemon(p.cmd, p.options);
 	forever.startServer(child);
     }
+*/
 });

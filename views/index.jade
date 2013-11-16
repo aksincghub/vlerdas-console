@@ -3,21 +3,22 @@ extends layout
 block content
   h1= title
   p Welcome to #{title}
-  table
-    thead
-      tr
-        th Name
-        th Running
-    tbody
-      each p in processes
+  form(action='/', method='post')
+    table
+      thead
         tr
-          td= p.name
-          if p.proc && p.proc.running
-            td Running
-          else
-            td Stopped
-  form(method='POST')
-    label(for='pname') Name
-    input(name='pname', type='text')
-    input(type='submit') Add 
-  
+          th Select
+          th Name
+          th Running
+      tbody
+        each p in processes
+          tr
+            td
+              input(id='uid', name='uid', type='radio', value='#{p.options.uid}')
+            td= p.name
+            if p.proc && p.proc.running
+              td Running
+            else
+              td Stopped
+    input(type='submit', name='start', value='Start')
+    input(type='submit', name='stop', value='Stop')
