@@ -1,24 +1,29 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
+  h1 Process List
+  p.
+    The table below shows the configured processes and their status.
+    Use the controls to start and stop the processes.
   form(action='/', method='post')
-    table
-      thead
-        tr
-          th Select
-          th Name
-          th Running
-      tbody
-        each p in processes
+    div(class='medium centered')
+      table
+        thead
           tr
-            td
-              input(id='uid', name='uid', type='radio', value='#{p.options.uid}')
-            td= p.name
-            if p.proc && p.proc.running
-              td Running
-            else
-              td Stopped
-    input(type='submit', name='start', value='Start')
-    input(type='submit', name='stop', value='Stop')
+            th Select
+            th Name
+            th Running
+        tbody
+          each p in processes
+            tr
+              td.selector
+                input(id='uid', name='uid', type='radio', value='#{p.options.uid}')
+              td= p.name
+              if p.proc && p.proc.running
+                td Running
+              else
+                td Stopped
+      .submit
+        input(type='submit', name='start', value='Start')
+        input(type='submit', name='stop', value='Stop')
+        a(href='/') Refresh

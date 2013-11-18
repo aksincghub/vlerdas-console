@@ -12,6 +12,7 @@ exports.index = function(req, res) {
 	var p = processes[req.body.uid];
 	if (p) {
 	    var r = forever.startDaemon(p.cmd, p.options);
+	    forever.startServer(r);
 	    renderPage(req, res, processes);
 	}
     } else if (req.body.stop) {
