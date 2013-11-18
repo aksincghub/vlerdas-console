@@ -34,12 +34,27 @@ app.get('/users', user.list);
 
 http.createServer(app).listen(config.server.port, config.server.host, function() {
     console.log('VLER DAS Console listening at http://' + config.server.host + ':' + config.server.port);
-/*
-    for (var uid in config.processes) {
-	var p = config.processes[uid];
-	p.options.uid = uid;
-	var child = forever.startDaemon(p.cmd, p.options);
-	forever.startServer(child);
-    }
-*/
+    var processes = config.processes;
+
+    forever.list(false, function (p, procs) {
+        var taskList = {};
+
+        if (procs) {
+            for (var i = 0;  i < procs.length;  ++i) {
+                var proc = procs[i];
+
+                if (processes[proc.uid]) {
+                    taskList[proc.uid] = {config: processes[proc.uid], proc: proc};
+                }
+            }
+        }
+
+        for (var p in processes) {
+	    var process = processes[p];
+            if (process.runAtStartup && (taskList[p] == null || !taskList[p].proc.running)) {
+		var child = forever.startDaemon(process.cmd, process.options);
+		forever.startServer(child);
+            }
+        }
+    });
 });

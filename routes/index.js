@@ -28,32 +28,27 @@ exports.index = function(req, res) {
 
 function renderPage(req, res, processes) {  
     forever.list(false, function (p, procs) {
-	var listed = {};
+	var taskList = {};
 
 	if (procs) {
-	    console.log(procs);
             for (var i = 0;  i < procs.length;  ++i) {
     	    	var proc = procs[i];
-	    
+	    	
 	    	if (processes[proc.uid]) {
-	    	    processes[proc.uid].proc = proc;
-		    listed[proc.uid] = proc;
+		    taskList[proc.uid] = {config: processes[proc.uid], proc: proc};
 	    	}
 	    }
 	}
 
 	for (var p in processes) {
-	    if (listed[p] == null) {
-		console.log(p + ' is not listed.');
-		processes[p].proc = null;
+	    if (taskList[p] == null) {
+		taskList[p] = {config: processes[p]};
 	    }
 	}
     
-	console.log(JSON.stringify(processes));
-
    	res.render('index', {
 	    title : 'VLER DAS Console',
-	    processes : processes
+	    taskList : taskList 
     	});
     });
 }

@@ -14,11 +14,11 @@ block content
             th Name
             th Running
         tbody
-          each p in processes
+          each p in taskList
             tr
               td.selector
-                input(id='uid', name='uid', type='radio', value='#{p.options.uid}')
-              td= p.name
+                input(id='uid', name='uid', type='radio', value='#{p.config.options.uid}')
+              td= p.config.name
               if p.proc && p.proc.running
                 td Running
               else

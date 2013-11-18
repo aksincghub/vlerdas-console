@@ -7,6 +7,7 @@
 		"ecrud":{
 			"name":"eCrud (core)",
 			"cmd":"server.js",
+			"runAtStartup":true,
 			"options":{
 				"uid":"ecrud",
 				"sourceDir":"../vlerdas-ecrud/bin",
@@ -20,6 +21,7 @@
 		"audit":{
 			"name":"eCrud (audit)",
 			"cmd":"server.js",
+			"runAtStartup":true,
 			"options":{
 				"uid":"audit",
 				"sourceDir":"../vlerdas-ecrud/bin",
