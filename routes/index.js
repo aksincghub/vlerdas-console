@@ -10,22 +10,65 @@ exports.index = function(req, res) {
     var processes = config.processes;
  
     if (req.body.start) {
-	var p = processes[req.body.uid];
-	if (p) {
-	    var r = forever.startDaemon(p.cmd, p.options);
-	    forever.startServer(r);
-	    renderPage(req, res, processes);
+	if (Array.isArray(req.body.uid)) {
+	    for (var i = 0;  i < req.body.uid.length;  ++i) {
+	        startProcess(req.body.uid[i], processes);
+	    }
+	} else {
+	    startProcess(req.body.uid, processes);
 	}
+	renderPage(req, res, processes);
     } else if (req.body.stop) {
-	var p = processes[req.body.uid];
-	if (p) {
-	    var r = forever.stop(p.options.uid);
-	    renderPage(req, res, processes);
-	}
+        if (Array.isArray(req.body.uid)) {
+            for (var i = 0;  i < req.body.uid.length;  ++i) {
+                stopProcess(req.body.uid[i], processes);
+            }
+        } else {
+            stopProcess(req.body.uid, processes);
+        }
+        renderPage(req, res, processes);
     } else {
 	renderPage(req, res, processes);
     }
 };
+
+function startProcess(uid, processes) {
+    var p = processes[uid];
+    if (p) {
+	isProcessRunning(uid, function(running) {
+	    if (!running) {
+	        var r = forever.startDaemon(p.cmd, p.options);
+	        forever.startServer(r);
+    	    }
+	});
+    }
+}
+
+function stopProcess(uid, processes) {
+    var p = processes[uid];
+    if (p) {
+	isProcessRunning(uid, function(running) {
+	    if (running) {
+	        forever.stop(uid);
+	    }
+	});
+    }
+}
+
+function isProcessRunning(uid, callback) {
+    var ret = false;
+    forever.list(false, function (p, procs) {
+        if (procs) {
+	    for (var i = 0;  i < procs.length;  ++i) {
+	        if (procs[i].uid == uid) {
+		    ret = true;
+		    break;
+		}
+	    }
+	}
+	callback(ret);
+    });
+}
 
 function renderPage(req, res, processes) {  
     forever.list(false, function (p, procs) {
