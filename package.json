@@ -9,6 +9,7 @@
     "express": "3.4.3",
     "jade": "*",
     "forever":"0.10.9",
-    "config":"0.4.33"
+    "config":"0.4.33",
+    "moment":"2.4.0"
   }
 }
