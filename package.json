@@ -7,6 +7,8 @@
   },
   "dependencies": {
     "express": "3.4.3",
-    "jade": "*"
+    "jade": "*",
+    "forever":"0.10.9",
+    "config":"0.4.33"
   }
 }
