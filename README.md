@@ -2,11 +2,11 @@
 
 # vlerdas-console
 
-Administration console used to start and stop node.js applications on a server using forever-moinitor.
+Administration console used to start and stop node.js applications on a server using forever-monitor.
 
 ## Usage
 
-Configure applications that we be run on server using configuration file to set command to running, working directory, and more.
+Configure applications that will be run on server using configuration file to set command to runn, working directory, and more.
 Start the server by running node app.js
 
 ## Developing
