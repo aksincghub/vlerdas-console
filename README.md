@@ -2,11 +2,12 @@
 
 # vlerdas-console
 
-
+Administration console used to start and stop node.js applications on a server using forever-moinitor.
 
 ## Usage
 
-
+Configure applications that we be run on server using configuration file to set command to running, working directory, and more.
+Start the server by running node app.js
 
 ## Developing
 
@@ -14,7 +15,4 @@
 
 ### Tools
 
-Created with [Nodeclipse](https://github.com/Nodeclipse/nodeclipse-1)
- ([Eclipse Marketplace](http://marketplace.eclipse.org/content/nodeclipse), [site](http://www.nodeclipse.org))   
-
-Nodeclipse is free open-source project that grows with your contributions.
+forever.js
