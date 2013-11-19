@@ -4,6 +4,7 @@
 
 var config = require('config');
 var forever = require('forever');
+var moment = require('moment');
 
 exports.index = function(req, res) {
     var processes = config.processes;
@@ -35,7 +36,8 @@ function renderPage(req, res, processes) {
     	    	var proc = procs[i];
 	    	
 	    	if (processes[proc.uid]) {
-		    taskList[proc.uid] = {config: processes[proc.uid], proc: proc};
+		    taskList[proc.uid] = {config: processes[proc.uid], proc: proc, started: moment(proc.ctime).format(),
+                                          uptime: moment(proc.ctime).fromNow(true)};
 	    	}
 	    }
 	}

@@ -6,13 +6,15 @@ block content
     The table below shows the configured processes and their status.
     Use the controls to start and stop the processes.
   form(action='/', method='post')
-    div(class='medium centered')
+    div(class='wide centered')
       table
         thead
           tr
             th Select
             th Name
             th Running
+            th Started
+            th Uptime
         tbody
           each p in taskList
             tr
@@ -21,8 +23,11 @@ block content
               td= p.config.name
               if p.proc && p.proc.running
                 td Running
+                td= p.started
+                td= p.uptime
               else
                 td Stopped
+                td(colspan=2) N/A
       .submit
         input(type='submit', name='start', value='Start')
         input(type='submit', name='stop', value='Stop')
