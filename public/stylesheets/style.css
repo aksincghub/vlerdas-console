@@ -1,0 +1,69 @@
+body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: #00B7FF;
+}
+
+#container {
+	width: 100%;
+}
+
+#heading {
+	width: 100%;
+	text-align: center;
+	font-size: 24pt;
+	font-weight: bold;
+}
+
+#content {
+}
+
+h1 {
+	font-size: 18pt;
+	font-weight: bold;
+}
+
+.narrow {
+	width: 25%;
+}
+
+.medium {
+	width: 50%;
+}
+
+.wide {
+	width: 905;
+}
+
+.centered {
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.submit {
+	margin-top: 1em;
+	margin-bottom: 1em;
+	text-align: right;
+}
+
+table {
+	width: 100%;
+	border-collapse: collapse;
+}
+
+table thead {
+	background-color: blue;
+	color: white;
+	font-weight: bold;
+}
+
+table thead th {
+	text-align: center;
+}
+
+table tbody td.selector {
+	text-align: center;
+}

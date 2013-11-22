@@ -1,0 +1,39 @@
+{
+	"server":{
+		"port":3000,
+		"host":"localhost"
+	},
+	"processes":{
+		"ecrud":{
+			"name":"eCrud (core)",
+			"cmd":"server.js",
+			"runAtStartup":true,
+			"options":{
+				"uid":"ecrud",
+				"sourceDir":"../vlerdas-ecrud/bin",
+				"cwd":"../vlerdas-ecrud",
+				"max":5,
+				"outFile":"eCrud.out",
+				"errFile":"eCrud.out",
+				"logFile":"eCrud.log"
+			}
+		},
+		"audit":{
+			"name":"eCrud (audit)",
+			"cmd":"server.js",
+			"runAtStartup":true,
+			"options":{
+				"uid":"audit",
+				"sourceDir":"../vlerdas-ecrud/bin",
+				"cwd":"../vlerdas-ecrud",
+				"max":5,
+				"outFile":"audit.out",
+				"errFile":"audit.out",
+				"logFile":"audit.log",
+				"options":[
+					"--NODE_CONFIG_DIR=config/audit"
+				]
+			}
+		}
+	}
+}

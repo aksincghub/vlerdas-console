@@ -1,0 +1,16 @@
+doctype 5
+html
+  head
+    title= title
+    link(rel='stylesheet', href='/stylesheets/style.css')
+  body
+    #container
+      #header
+        block header
+          include header.jade
+      #content
+        block content
+          TODO: define content here.
+      #footer
+        block footer
+          include footer.jade
